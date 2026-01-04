@@ -1,0 +1,5 @@
+{
+  "name": "台灣百岳登山紀錄助手 (Taiwan 100 Peaks Tracker)",
+  "description": "一個專為登山愛好者設計的台灣百岳清單紀錄工具，包含進度追蹤、視覺化地圖呈現，並整合 Gemini AI 提供山岳資訊與建議。",
+  "requestFramePermissions": []
+}
