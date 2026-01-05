@@ -10,6 +10,8 @@ const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterRange, setFilterRange] = useState('All');
 
+  console.log("App component rendering...");
+
   // Load from LocalStorage
   useEffect(() => {
     const saved = localStorage.getItem('climbed_peaks');
@@ -24,7 +26,7 @@ const App: React.FC = () => {
   }, [climbedIds]);
 
   const toggleClimb = (id: string) => {
-    setClimbedIds(prev => 
+    setClimbedIds(prev =>
       prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
     );
   };
@@ -53,7 +55,7 @@ const App: React.FC = () => {
             <p className="text-[9px] text-emerald-200 opacity-80 uppercase font-bold tracking-widest leading-none">Taiwan 100 Peaks Tracker</p>
           </div>
         </div>
-        
+
         <div className="flex items-center gap-3 bg-white/10 px-3 py-1.5 rounded-xl border border-white/10">
           <div className="text-right hidden sm:block">
             <p className="text-[9px] text-emerald-200 font-bold leading-none">成就等級</p>
@@ -69,26 +71,26 @@ const App: React.FC = () => {
 
       {/* Main Content Area - 固定高度以啟用內部滾動 */}
       <main className="flex-1 p-4 grid grid-cols-1 lg:grid-cols-12 gap-6 overflow-hidden">
-        
+
         {/* 左側：統計與搜尋 (加大後的 Stats 將呈現於此) */}
         <div className="lg:col-span-3 flex flex-col gap-6 overflow-y-auto custom-scrollbar pr-1">
           <Stats allPeaks={TAIWAN_PEAKS} climbedIds={climbedIds} />
-          
+
           <div className="bg-white p-6 rounded-[2.5rem] shadow-sm border border-slate-200 space-y-4">
             <h3 className="text-xs font-black text-slate-700 flex items-center gap-2 uppercase tracking-widest">
               <i className="fa-solid fa-filter text-emerald-600"></i> 快速搜尋
             </h3>
             <div className="relative">
               <i className="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-              <input 
-                type="text" 
-                placeholder="搜尋山名或地點..." 
+              <input
+                type="text"
+                placeholder="搜尋山名或地點..."
                 className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl text-xs font-bold focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <select 
+            <select
               className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3 text-xs font-bold text-slate-600 focus:ring-2 focus:ring-emerald-500 focus:outline-none appearance-none cursor-pointer transition-all"
               value={filterRange}
               onChange={(e) => setFilterRange(e.target.value)}
@@ -100,12 +102,12 @@ const App: React.FC = () => {
           </div>
 
           <div className="bg-emerald-50/50 p-6 rounded-[2.5rem] border border-emerald-100/50">
-             <h4 className="text-[10px] font-black text-emerald-800 uppercase tracking-widest mb-3 flex items-center gap-2">
-               <i className="fa-solid fa-lightbulb"></i> 登山小叮嚀
-             </h4>
-             <p className="text-xs text-emerald-700 font-bold leading-relaxed">
-               百岳之美在於過程。登頂前請確保體能狀況與裝備齊全，並落實 LNT 無痕山林準則。
-             </p>
+            <h4 className="text-[10px] font-black text-emerald-800 uppercase tracking-widest mb-3 flex items-center gap-2">
+              <i className="fa-solid fa-lightbulb"></i> 登山小叮嚀
+            </h4>
+            <p className="text-xs text-emerald-700 font-bold leading-relaxed">
+              百岳之美在於過程。登頂前請確保體能狀況與裝備齊全，並落實 LNT 無痕山林準則。
+            </p>
           </div>
         </div>
 
@@ -124,12 +126,12 @@ const App: React.FC = () => {
               {filteredPeaks.length} 座
             </span>
           </div>
-          
+
           <div className="flex-1 overflow-y-auto custom-scrollbar p-3 space-y-2 bg-slate-50/30">
             {filteredPeaks.map((peak) => {
               const isClimbed = climbedIds.includes(peak.id);
               return (
-                <div 
+                <div
                   key={peak.id}
                   onClick={() => toggleClimb(peak.id)}
                   className={`cursor-pointer group relative p-3 rounded-2xl border transition-all duration-150 flex items-center gap-3 ${isClimbed ? 'border-emerald-500 bg-white shadow-md ring-1 ring-emerald-500/10' : 'border-white hover:border-slate-200 bg-white'}`}
@@ -137,7 +139,7 @@ const App: React.FC = () => {
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all ${isClimbed ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 'bg-slate-100 text-slate-400'}`}>
                     {isClimbed ? <i className="fa-solid fa-check text-xs"></i> : <span className="text-[10px] font-black">#{peak.rank}</span>}
                   </div>
-                  
+
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
                       <h4 className={`text-sm font-black truncate ${isClimbed ? 'text-slate-800' : 'text-slate-600'}`}>{peak.name}</h4>
@@ -157,7 +159,7 @@ const App: React.FC = () => {
                 </div>
               );
             })}
-            
+
             {filteredPeaks.length === 0 && (
               <div className="text-center py-10">
                 <p className="text-xs text-slate-400 font-bold">未找到符合條件的山岳</p>
@@ -175,17 +177,17 @@ const App: React.FC = () => {
             <span className="text-white/30 text-[10px] font-bold">/ 100</span>
           </div>
           <div className="w-48 h-1.5 bg-white/10 rounded-full overflow-hidden hidden sm:block">
-            <div 
+            <div
               className="h-full bg-emerald-500 transition-all duration-700 shadow-[0_0_15px_rgba(16,185,129,0.5)]"
               style={{ width: `${(climbedIds.length / TAIWAN_PEAKS.length) * 100}%` }}
             ></div>
           </div>
         </div>
-        
+
         <div className="flex items-center gap-2">
           <span className="text-[10px] font-black text-white/40 uppercase tracking-widest mr-2">Level Up Progress</span>
           {[...Array(5)].map((_, i) => (
-             <i key={i} className={`fa-solid fa-star text-xs ${i < Math.floor(climbedIds.length / 20) ? 'text-yellow-400 drop-shadow-[0_0_5px_rgba(250,204,21,0.5)]' : 'text-white/10'}`}></i>
+            <i key={i} className={`fa-solid fa-star text-xs ${i < Math.floor(climbedIds.length / 20) ? 'text-yellow-400 drop-shadow-[0_0_5px_rgba(250,204,21,0.5)]' : 'text-white/10'}`}></i>
           ))}
         </div>
       </footer>
