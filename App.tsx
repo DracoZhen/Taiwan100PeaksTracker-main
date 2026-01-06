@@ -45,9 +45,9 @@ const App: React.FC = () => {
   }, [searchTerm, filterRange]);
 
   return (
-    <div className="h-screen bg-slate-50 flex flex-col overflow-hidden">
+    <div className="min-h-[100dvh] lg:h-screen bg-slate-50 flex flex-col lg:overflow-hidden">
       {/* Header - 精簡導航欄 */}
-      <header className="bg-emerald-800 text-white py-4 px-6 shadow-md flex items-center justify-between z-30 h-16 shrink-0">
+      <header className="bg-emerald-800 text-white py-4 px-6 shadow-md flex items-center justify-between z-30 h-16 shrink-0 sticky top-0 lg:relative">
         <div className="flex items-center gap-3">
           <i className="fa-solid fa-mountain-summit text-xl text-yellow-400"></i>
           <div>
@@ -69,11 +69,11 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      {/* Main Content Area - 固定高度以啟用內部滾動 */}
-      <main className="flex-1 p-4 grid grid-cols-1 lg:grid-cols-12 gap-6 overflow-hidden">
+      {/* Main Content Area - 手機版自然捲動，電腦版固定高度 */}
+      <main className="flex-1 p-4 flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:overflow-hidden">
 
-        {/* 左側：統計與搜尋 (加大後的 Stats 將呈現於此) */}
-        <div className="lg:col-span-3 flex flex-col gap-6 overflow-y-auto custom-scrollbar pr-1">
+        {/* 左側：統計與搜尋 */}
+        <div className="order-1 lg:col-span-3 flex flex-col gap-6 lg:overflow-y-auto custom-scrollbar lg:pr-1">
           <Stats allPeaks={TAIWAN_PEAKS} climbedIds={climbedIds} />
 
           <div className="bg-white p-6 rounded-[2.5rem] shadow-sm border border-slate-200 space-y-4">
@@ -112,12 +112,12 @@ const App: React.FC = () => {
         </div>
 
         {/* 中間：互動式大型地圖 */}
-        <div className="lg:col-span-6 flex flex-col h-full min-h-[300px]">
+        <div className="order-2 lg:col-span-6 flex flex-col h-[50vh] min-h-[400px] lg:h-full">
           <PeakMap peaks={TAIWAN_PEAKS} climbedIds={climbedIds} />
         </div>
 
         {/* 右側：精簡版百岳清單 */}
-        <div className="lg:col-span-3 flex flex-col h-full overflow-hidden bg-white border border-slate-200 rounded-[2.5rem] shadow-sm">
+        <div className="order-3 lg:col-span-3 flex flex-col h-[500px] lg:h-full overflow-hidden bg-white border border-slate-200 rounded-[2.5rem] shadow-sm">
           <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0">
             <h3 className="text-xs font-black text-slate-700 flex items-center gap-2 uppercase tracking-widest">
               <i className="fa-solid fa-list-check text-emerald-600"></i> 清單瀏覽
@@ -170,7 +170,7 @@ const App: React.FC = () => {
       </main>
 
       {/* 底部進度條 */}
-      <footer className="bg-slate-900 text-white px-8 py-2 flex items-center justify-between z-30 shrink-0 h-14 shadow-[0_-10px_30px_rgba(0,0,0,0.1)]">
+      <footer className="bg-slate-900 text-white px-8 py-2 flex items-center justify-between z-30 shrink-0 h-14 shadow-[0_-10px_30px_rgba(0,0,0,0.1)] sticky bottom-0 lg:relative">
         <div className="flex items-center gap-6">
           <div className="flex items-baseline gap-1">
             <span className="text-emerald-400 font-black text-xl">{climbedIds.length}</span>

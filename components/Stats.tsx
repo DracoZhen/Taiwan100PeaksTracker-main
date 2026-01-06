@@ -20,7 +20,7 @@ const Stats: React.FC<StatsProps> = ({ allPeaks, climbedIds }) => {
   ];
 
   return (
-    <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-200 overflow-hidden flex flex-col items-center text-center">
+    <div className="bg-white p-6 lg:p-8 rounded-[2.5rem] shadow-sm border border-slate-200 overflow-hidden flex flex-col items-center text-center">
       <div className="w-full flex items-center justify-between mb-6">
         <h3 className="text-sm font-black text-slate-800 uppercase tracking-widest flex items-center gap-2">
           <span className="w-2 h-6 bg-emerald-500 rounded-full"></span>
@@ -47,7 +47,7 @@ const Stats: React.FC<StatsProps> = ({ allPeaks, climbedIds }) => {
                 <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
             </Pie>
-            <Tooltip 
+            <Tooltip
               contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', fontSize: '12px', fontWeight: 'bold' }}
             />
           </PieChart>
@@ -57,7 +57,7 @@ const Stats: React.FC<StatsProps> = ({ allPeaks, climbedIds }) => {
           <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Completion</span>
         </div>
       </div>
-      
+
       <div className="w-full grid grid-cols-2 gap-4">
         <div className="bg-slate-50 p-4 rounded-3xl border border-slate-100">
           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">已登頂</p>
